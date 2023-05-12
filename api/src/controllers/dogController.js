@@ -1,12 +1,13 @@
 //const { response } = require("../app");
+const { where } = require("sequelize");
 const { Dog } = require("../db");
 
 const createDog = async (req, res) => {
   try {
-    const { dog_name, weight, height, life_span, image } = req.body;
+    const { name, weight, height, life_span, image } = req.body;
 
     let dogCreate = await Dog.create({
-      dog_name,
+      name,
       weight,
       height,
       life_span,
@@ -29,12 +30,22 @@ const getAllDogs = async (req, res) => {
 
 const getDogsId = async (req, res) => {
   try {
-  } catch (error) {}
+    const { id } = req.params;
+    let response = await Dog.findByPk(id);
+    return res.status(200).json(response);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
 };
 
 const getDogsName = async (req, res) => {
   try {
-  } catch (error) {}
+    const { name } = req.query;
+    let response = await Dog.findOne({ where: { name } });
+    return res.status(200).json(response);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
 };
 
 module.exports = {

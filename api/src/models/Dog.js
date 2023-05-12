@@ -9,7 +9,7 @@ module.exports = (sequelize) => {
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
       },
-      dog_name: {
+      name: {
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -33,7 +33,7 @@ module.exports = (sequelize) => {
       },
     },
     {
-      timesTamps: false,
+      timestamps: false,
     }
   );
 };
