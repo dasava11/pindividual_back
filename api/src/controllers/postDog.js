@@ -3,7 +3,13 @@ const { Dog } = require("../db");
 const createDog = async (req, res) => {
   const { name, weight, height, life_span, image, temperament } = req.body;
 
-  if (!name || !weight || !height || !life_span || !image || !temperament) {
+  if (
+    !name ||
+    !weight ||
+    !height ||
+    !life_span ||
+    !image /* || !temperament*/
+  ) {
     return res.status(400).json({ message: "Faltan datos por diligenciar" });
   }
 
