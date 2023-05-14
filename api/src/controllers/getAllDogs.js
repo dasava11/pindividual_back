@@ -1,15 +1,19 @@
-const {Dog}=require("../db")
+const { Dog } = require("../db");
+const axios = require("axios");
 
 const getAllDogs = async (req, res) => {
-    try {
-      let response = await Dog.findAll();
-      if (!response) {
-        return res.status(200).json({message: "No existen perros"})
-      }
-      return res.status(200).json(response);
-    } catch (error) {
-      return res.status(500).json({ message: error.message });
-    }
-  };
+  try {
+    let responseAPI = await axios.get("https://api.thedogapi.com/v1/breeds");
+    let responseDB = await Dog.findAll();
 
-  module.exports=getAllDogs
+    if (!responseAPI) {
+      return res.status(404).json({ message: "servidor no encontrado" });
+    }
+    let allDogs = [...responseAPI, ...responseDB];
+    return res.status(200).json(allDogs);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = getAllDogs;

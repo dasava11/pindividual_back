@@ -4,18 +4,18 @@ module.exports = (sequelize) => {
   sequelize.define(
     "Temperament",
     {
-      temper_id: {
+      id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
       },
-      temper_name: {
+      name: {
         type: DataTypes.STRING,
         allowNull: false,
       },
     },
     {
-      timestapms: false,
+      timestamps: false,
     }
   );
 };
