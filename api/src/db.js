@@ -1,5 +1,5 @@
 require("dotenv").config();
-const { Sequelize } = require("sequelize");
+const { Sequelize, Op } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
 const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
@@ -40,10 +40,11 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 const { Dog, Temperament } = sequelize.models;
 
-Dog.belongsToMany(Temperament, { through: "DogTemper" });
+Dog.belongsToMany(Temperament, { through: "DogTemper", timestamps: false });
 Temperament.belongsToMany(Dog, { through: "DogTemper" });
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   conn: sequelize, // para importart la conexión { conn } = require('./db.js');
+  Op,
 };

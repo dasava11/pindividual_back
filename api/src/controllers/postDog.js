@@ -1,4 +1,4 @@
-const { Dog } = require("../db");
+const { Dog, Temperament } = require("../db");
 
 const createDog = async (req, res) => {
   const { name, weight, height, life_span, image, temperament } = req.body;
@@ -23,6 +23,16 @@ const createDog = async (req, res) => {
       .json({ message: "El perro ya existe en la base de datos" });
   }
 
+  const temperamentexisting = await Temperament.findOne({
+    where: { name: temperament },
+  });
+
+  if (!temperamentexisting) {
+    return res
+      .status(500)
+      .json({ message: "El temperamento no existe en la base de datos" });
+  }
+
   try {
     let dogCreate = await Dog.create({
       name,
@@ -31,7 +41,7 @@ const createDog = async (req, res) => {
       life_span,
       image,
     });
-    dogCreate.addTemperaments(temperament);
+    await dogCreate.addTemperaments(temperamentexisting);
     return res.status(201).json({ message: "Perro creado exitosamente" });
   } catch (error) {
     return res.status(500).json({ error: error.message });
