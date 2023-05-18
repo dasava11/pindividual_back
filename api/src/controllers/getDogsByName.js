@@ -21,12 +21,12 @@ const getDogsByName = async (req, res) => {
     });
     //({where: { name: {[Op.iLike]: %" + name + "%",},}, include: {model: Temper}});
     let findDogApi = responseNameApi.data.filter(
-      (dog) => dog.name.toLowerCase() === name.toLowerCase()
+      (dog) => dog.name.toLowerCase() == name.toLowerCase()
     );
 
     let dogFound = [...findDogApi, ...findDogDb];
 
-    if (!dogFound) {
+    if (!dogFound.length > 0) {
       return res.status(400).json({ message: "Perro no encontrado" });
     }
 
