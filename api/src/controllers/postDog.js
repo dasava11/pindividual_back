@@ -41,6 +41,7 @@ const createDog = async (req, res) => {
       life_span,
       image,
     });
+
     await dogCreate.addTemperaments(temperamentexisting);
     return res.status(201).json({ message: "Perro creado exitosamente" });
   } catch (error) {
