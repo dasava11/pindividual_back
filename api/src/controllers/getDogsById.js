@@ -33,6 +33,7 @@ const getDogsById = async (req, res) => {
     if (!responseIdDb) {
       return res.status(400).json({ message: "Perro no encontrado" });
     }
+
     return res.status(200).json(responseIdDb);
   } catch (error) {
     return res.status(500).json({ message: error.message });
