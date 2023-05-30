@@ -8,7 +8,7 @@ const createDog = async (req, res) => {
     !weight ||
     !height ||
     !life_span ||
-    !image /* || !temperament*/
+    !image || !temperament
   ) {
     return res.status(400).json({ message: "Faltan datos por diligenciar" });
   }
