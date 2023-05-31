@@ -19,10 +19,14 @@ const getDogsByName = async (req, res) => {
       },
       include: { model: Temperament },
     });
-    //({where: { name: {[Op.iLike]: %" + name + "%",},}, include: {model: Temper}});
-    let findDogApi = responseNameApi.data.filter(
-      (dog) => dog.name.toLowerCase() == name.toLowerCase()
-    );
+
+    let findDogApi = await responseNameApi.data.filter((dog) => {
+      dog.name.toString().toLowerCase.includes(name.toLowerCase());
+    });
+
+    /*         let findDogApi = responseNameApi.data.filter(
+          (dog) => dog.name.toLowerCase() == name.toLowerCase()
+        ); */
 
     let dogFound = [...findDogApi, ...findDogDb];
 
