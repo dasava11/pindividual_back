@@ -21,7 +21,7 @@ const getDogsByName = async (req, res) => {
     });
 
     let findDogApi = await responseNameApi.data.filter((dog) => {
-      dog.name.toLowerCase().includes(name.toLowerCase());
+      dog.name.includes(name);
     });
 
     /*     let findDogApi = responseNameApi.data.filter(
