@@ -21,7 +21,6 @@ const getDogsById = async (req, res) => {
       if (!dogById) {
         return res.status(400).json({ message: "Perro no encontrado" });
       }
-
       return res.status(200).json(dogById);
     } catch (error) {
       return res.status(500).json({ message: error.message });
