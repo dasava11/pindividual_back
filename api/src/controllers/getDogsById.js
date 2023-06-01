@@ -29,7 +29,9 @@ const getDogsById = async (req, res) => {
   }
 
   try {
-    let responseIdDb = await Dog.findByPk(id);
+    let responseIdDb = await Dog.findByPk(id, {
+      include: { model: Temperament },
+    });
     if (!responseIdDb) {
       return res.status(400).json({ message: "Perro no encontrado" });
     }
