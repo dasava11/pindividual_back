@@ -20,13 +20,14 @@ const getDogsByName = async (req, res) => {
       include: { model: Temperament },
     });
 
-    let findDogApi = await responseNameApi.data.map((dog) => {
+    /*     let findDogApi = await responseNameApi.data.filter((dog) => {
       dog.name.toLowerCase().includes(name.toLowerCase());
-    });
+    }); */
 
-    /*  let findDogApi = responseNameApi.data.includes(
-      (dog) => dog.name.toLowerCase() == name.toLowerCase()
-    ); */
+    let findDogApi = responseNameApi.data.filter((dog) =>
+      dog.name.includes(name)
+    );
+    console.log("chau");
 
     let dogFound = [...findDogApi, ...findDogDb];
 
