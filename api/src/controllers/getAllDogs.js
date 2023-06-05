@@ -5,8 +5,6 @@ const getAllDogs = async (req, res) => {
   try {
     let responseAPI = await axios.get("https://api.thedogapi.com/v1/breeds");
     let responseDB = await Dog.findAll({ include: { model: Temperament } });
-    //{include: {model: Temperament}}
-    console.log(responseAPI);
 
     if (!responseAPI) {
       return res.status(404).json({ message: "servidor no encontrado" });
