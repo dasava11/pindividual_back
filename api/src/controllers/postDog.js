@@ -3,13 +3,7 @@ const { Dog, Temperament } = require("../db");
 const createDog = async (req, res) => {
   const { name, weight, height, life_span, image, temperament } = req.body;
 
-  if (
-    !name ||
-    !weight ||
-    !height ||
-    !life_span ||
-    !image || !temperament
-  ) {
+  if (!name || !weight || !height || !life_span || !image || !temperament) {
     return res.status(400).json({ message: "Faltan datos por diligenciar" });
   }
 
@@ -23,7 +17,7 @@ const createDog = async (req, res) => {
       .json({ message: "El perro ya existe en la base de datos" });
   }
 
-  const temperamentexisting = await Temperament.findOne({
+  const temperamentexisting = await Temperament.findAll({
     where: { name: temperament },
   });
 
