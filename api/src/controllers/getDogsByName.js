@@ -29,7 +29,7 @@ const getDogsByName = async (req, res) => {
     if (!dogFound.length >= 0) {
       return res
         .status(400)
-        .json({ message: `The Dog ${name} does not exist` });
+        .json({ message: "The Dog does not exist" });
     }
 
     return res.status(200).json(dogFound);
