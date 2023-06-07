@@ -8,9 +8,9 @@ const getDogsByName = async (req, res) => {
   );
 
   if (name === "") {
-    return res
-      .status(400)
-      .json({ message: "Debe digital el nombre del perro que desea obtener" });
+    return res.status(400).json({
+      message: "You must digital the name of the dog you want to obtain",
+    });
   }
   try {
     let findDogDb = await Dog.findAll({
@@ -26,8 +26,10 @@ const getDogsByName = async (req, res) => {
 
     let dogFound = [...findDogApi, ...findDogDb];
 
-    if (!dogFound.length > 0) {
-      return res.status(400).json({ message: "Perro no encontrado" });
+    if (!dogFound.length >= 0) {
+      return res
+        .status(400)
+        .json({ message: `The Dog ${name} does not exist` });
     }
 
     return res.status(200).json(dogFound);

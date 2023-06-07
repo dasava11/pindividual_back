@@ -7,7 +7,7 @@ const getAllDogs = async (req, res) => {
     let responseDB = await Dog.findAll({ include: { model: Temperament } });
 
     if (!responseAPI) {
-      return res.status(404).json({ message: "servidor no encontrado" });
+      return res.status(404).json({ message: "Server Not Found" });
     }
     let allDogs = [...responseAPI.data, ...responseDB];
     return res.status(200).json(allDogs);

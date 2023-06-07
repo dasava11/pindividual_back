@@ -6,9 +6,9 @@ const getDogsById = async (req, res) => {
   //const regex = /-.*-/;
 
   if (id === "") {
-    return res
-      .status(400)
-      .json({ message: "Debe digital el ID del perro que desea obtener" });
+    return res.status(400).json({
+      message: `You must digital the ${id} of the dog you want to obtain`,
+    });
   }
 
   if (id.length < 5) {
@@ -19,7 +19,7 @@ const getDogsById = async (req, res) => {
 
     try {
       if (!dogById) {
-        return res.status(400).json({ message: "Perro no encontrado" });
+        return res.status(400).json({ message: "Dog not found" });
       }
       return res.status(200).json(dogById);
     } catch (error) {
@@ -32,7 +32,7 @@ const getDogsById = async (req, res) => {
       include: { model: Temperament },
     });
     if (!responseIdDb) {
-      return res.status(400).json({ message: "Perro no encontrado" });
+      return res.status(400).json({ message: "Dog not found" });
     }
 
     return res.status(200).json(responseIdDb);

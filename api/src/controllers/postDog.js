@@ -4,7 +4,7 @@ const createDog = async (req, res) => {
   const { name, weight, height, life_span, image, temperament } = req.body;
 
   if (!name || !weight || !height || !life_span || !image || !temperament) {
-    return res.status(400).json({ message: "Faltan datos por diligenciar" });
+    return res.status(400).json({ message: "Missing data to fill out" });
   }
 
   const existingDog = await Dog.findOne({
@@ -14,7 +14,7 @@ const createDog = async (req, res) => {
   if (existingDog) {
     return res
       .status(500)
-      .json({ message: "El perro ya existe en la base de datos" });
+      .json({ message: "The dog already exists in the database" });
   }
 
   const temperamentexisting = await Temperament.findAll({
@@ -24,7 +24,7 @@ const createDog = async (req, res) => {
   if (!temperamentexisting) {
     return res
       .status(500)
-      .json({ message: "El temperamento no existe en la base de datos" });
+      .json({ message: "The temperament does not exist in the database" });
   }
 
   try {
@@ -37,7 +37,7 @@ const createDog = async (req, res) => {
     });
 
     await dogCreate.addTemperaments(temperamentexisting);
-    return res.status(201).json({ message: "Perro creado exitosamente" });
+    return res.status(201).json({ message: "Dog created successfully" });
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
