@@ -8,6 +8,6 @@ const { PORT } = process.env;
 conn.sync({ force: true }).then(() => {
   getApiTempers();
   server.listen(PORT, () => {
-    console.log(`%s listening at ${PORT}`); // eslint-disable-line no-console
+    console.log(`%s listening at ${PORT}`);
   });
 });

@@ -21,6 +21,10 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      nick_name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       weight: {
         type: DataTypes.JSON,
         allowNull: false,
