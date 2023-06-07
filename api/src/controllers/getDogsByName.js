@@ -26,7 +26,7 @@ const getDogsByName = async (req, res) => {
 
     let dogFound = [...findDogApi, ...findDogDb];
 
-    if (!dogFound.length >= 0) {
+    if (dogFound.length < 0) {
       return res
         .status(400)
         .json({ message: "The Dog does not exist" });
